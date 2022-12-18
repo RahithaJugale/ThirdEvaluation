@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nissan.common.APIResponse;
 import com.nissan.dto.LoginDTO;
 import com.nissan.model.Login;
+import com.nissan.model.UserRegistration;
 import com.nissan.service.ILoginService;
+import com.nissan.service.IUserRegistrationService;
 
 @RestController
 @RequestMapping("api/")
@@ -24,9 +28,12 @@ public class LoginController {
 	@Autowired
 	ILoginService loginService;
 	
+	@Autowired
+	IUserRegistrationService userRegistrationService;
+	
 	//add new login
 	@PostMapping("logins")
-	public Login addNewLoginDetails(@PathVariable Login login) {
+	public Login addNewLoginDetails(@RequestBody Login login) {
 		return loginService.addNewLoginDetails(login);
 	}
 	
@@ -54,8 +61,46 @@ public class LoginController {
 		return loginService.searchByLoginId(_lId);
 	}
 	
+	
 	//------------------------------------------------------------------------------------------------------------------
 	
-	//public ResponseEntity<String> login (@RequestBody LoginDTO _loginDTO)
+	//add new user
+	@PostMapping("userRegistrations")
+	public UserRegistration addNewUser(@RequestBody UserRegistration userRegistration) {
+		return userRegistrationService.addNewUser(userRegistration);
+	}
+	
+	//update an existing user by ID
+	@PutMapping("userRegistrations/{_uId}")
+	public UserRegistration updateUser(@PathVariable Integer _uId, @RequestBody UserRegistration userRegistration) {
+		return userRegistrationService.updateUser(_uId, userRegistration);
+	}
+	
+	//list all users
+	@GetMapping("userRegistrations")
+	public List<UserRegistration> listAllUsers() {
+		return userRegistrationService.listAllUsers();
+	}
+	
+	//delete user by ID
+	@DeleteMapping("userRegistrations/{_uId}")
+	public UserRegistration deleteUser(@PathVariable Integer _uId) {
+		return userRegistrationService.deleteUser(_uId);
+	}
+	
+	//search user by ID
+	@GetMapping("userRegistrations/{_uId}")
+	public UserRegistration searchUserById(Integer _uId) {
+		return userRegistrationService.searchUserById(_uId);
+	}
+	
+	//------------------------------------------------------------------------------------------------------------------
+	
+	@GetMapping("login")
+	@ResponseBody
+	public APIResponse login (@RequestBody LoginDTO _loginDTO){
+		return loginService.login(_loginDTO);
+	}
 
+	
 }

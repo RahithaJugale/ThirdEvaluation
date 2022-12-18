@@ -52,6 +52,17 @@ public class UserRegistration {
 	}
 
 	//parameterized constructor
+	public UserRegistration(String firstName, String lastName, Integer age, String gender, String address,
+			Long phoneNumber, Integer lId, Boolean isActive) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+		this.gender = gender;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.lId = lId;
+		this.isActive = isActive;
+	}
 	public UserRegistration(Integer uId, String firstName, String lastName, Integer age, String gender, String address,
 			Long phoneNumber, Integer lId, Boolean isActive, DateTime createdAt, DateTime updatedAt, Login login) {
 		super();
@@ -84,6 +95,8 @@ public class UserRegistration {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
+	
+
 
 	//getters and setters
 	public Integer getuId() {

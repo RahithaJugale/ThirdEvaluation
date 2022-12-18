@@ -2,6 +2,8 @@ package com.nissan.service;
 
 import java.util.List;
 
+import com.nissan.common.APIResponse;
+import com.nissan.dto.LoginDTO;
 import com.nissan.model.Login;
 
 public interface ILoginService {
@@ -21,4 +23,6 @@ public interface ILoginService {
 	//search login
 	Login searchByLoginId(Integer _lId);
 	
+	//check if username and password is correct
+	public APIResponse login(LoginDTO _loginDTO);
 }
