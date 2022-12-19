@@ -3,7 +3,6 @@ package com.nissan.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nissan.common.APIResponse;
+import com.nissan.dto.LoginAfterRegistrationDTO;
 import com.nissan.dto.LoginDTO;
 import com.nissan.model.Login;
 import com.nissan.model.UserRegistration;
@@ -66,8 +66,8 @@ public class LoginController {
 	
 	//add new user
 	@PostMapping("userRegistrations")
-	public UserRegistration addNewUser(@RequestBody UserRegistration userRegistration) {
-		return userRegistrationService.addNewUser(userRegistration);
+	public LoginDTO addNewUser(@RequestBody LoginDTO loginDTO) {
+		return userRegistrationService.addNewUser(loginDTO);
 	}
 	
 	//update an existing user by ID
@@ -90,7 +90,7 @@ public class LoginController {
 	
 	//search user by ID
 	@GetMapping("userRegistrations/{_uId}")
-	public UserRegistration searchUserById(Integer _uId) {
+	public UserRegistration searchUserById(@PathVariable Integer _uId) {
 		return userRegistrationService.searchUserById(_uId);
 	}
 	
@@ -98,8 +98,8 @@ public class LoginController {
 	
 	@GetMapping("login")
 	@ResponseBody
-	public APIResponse login (@RequestBody LoginDTO _loginDTO){
-		return loginService.login(_loginDTO);
+	public APIResponse login (@RequestBody LoginAfterRegistrationDTO _loginAfterRegistrationDTO){
+		return loginService.login(_loginAfterRegistrationDTO);
 	}
 
 	

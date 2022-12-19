@@ -19,7 +19,7 @@ public class Login {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer lId;
 	
-	@Column(nullable=false)
+	@Column(nullable=false, unique=true)
 	private String username;
 	
 	@Column(nullable=false)

@@ -13,6 +13,8 @@ import javax.persistence.PrePersist;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class UserRegistration {
 
@@ -187,6 +189,7 @@ public class UserRegistration {
 		this.updatedAt = updatedAt;
 	}
 
+	@JsonBackReference
 	public Login getLogin() {
 		return login;
 	}

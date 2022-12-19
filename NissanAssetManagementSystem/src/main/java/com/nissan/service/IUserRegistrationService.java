@@ -2,12 +2,13 @@ package com.nissan.service;
 
 import java.util.List;
 
+import com.nissan.dto.LoginDTO;
 import com.nissan.model.UserRegistration;
 
 public interface IUserRegistrationService {
 	
 	//add new user
-	UserRegistration addNewUser(UserRegistration userRegistration);
+	LoginDTO addNewUser(LoginDTO loginDTO);
 	
 	//update an existing user by ID
 	UserRegistration updateUser(Integer _uId, UserRegistration userRegistration);

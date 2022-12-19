@@ -4,13 +4,12 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nissan.common.APIResponse;
 import com.nissan.common.Validation;
-import com.nissan.dto.LoginDTO;
+import com.nissan.dto.LoginAfterRegistrationDTO;
 import com.nissan.model.Login;
 import com.nissan.repo.ILoginRepository;
 
@@ -74,18 +73,18 @@ public class LoginServiceImplementation implements ILoginService {
 		return loginRepository.findById(_lId).get();
 	}
 	
-	public APIResponse login(LoginDTO _loginDTO) {
+	public APIResponse login(LoginAfterRegistrationDTO _loginAfterRegistrationDTO) {
 		APIResponse apiResponse = new APIResponse();
 		try {
 			//check if username exists in DB
-			String username = loginRepository.getUsername(_loginDTO.getUsername());
+			String username = loginRepository.getUsername(_loginAfterRegistrationDTO.getUsername());
 			if(username == null)
 				apiResponse.setText("Incorrect username");
 			else {
 				//check if password is correct
 				String password = loginRepository.getPasswordByUsername(username);
 				
-				if(_loginDTO.getPassword().equals(password)) {
+				if(_loginAfterRegistrationDTO.getPassword().equals(password)) {
 					apiResponse.setText("Login successful");
 				}else {
 					apiResponse.setText("Incorrect password");
